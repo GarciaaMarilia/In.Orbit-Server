@@ -4,16 +4,23 @@ import {
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
+import fastifyCors from '@fastify/cors'
 
 import { createGoalRoute } from '../routes/create-goal'
 import { getPeddingGoalsRoute } from '../routes/get-pending-goals'
+import { getWeekSummaryRoute } from '../routes/get-week-summary'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
+
+app.register(fastifyCors, {
+  origin: '*',
+})
 
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
 app.register(createGoalRoute)
+app.register(getWeekSummaryRoute)
 app.register(getPeddingGoalsRoute)
 
 app

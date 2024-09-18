@@ -7,8 +7,8 @@ import {
 import fastifyCors from '@fastify/cors'
 
 import { createGoalRoute } from '../routes/create-goal'
-import { getPeddingGoalsRoute } from '../routes/get-pending-goals'
 import { getWeekSummaryRoute } from '../routes/get-week-summary'
+import { getPeddingGoalsRoute } from '../routes/get-pending-goals'
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 

@@ -75,7 +75,7 @@ Here are some example endpoints available in the application:
 
 ## Project Structure
 
-
+```bash
 📂 personal-goals-tracker
 ├── 📂 .migrations           # Database migration files
 ├── 📂 node_modules          # Installed Node.js packages
@@ -105,3 +105,4 @@ Here are some example endpoints available in the application:
 ├── package.json             # Project metadata and dependencies
 ├── README.md                # Project documentation
 └── tsconfig.json            # TypeScript configuration file
+```

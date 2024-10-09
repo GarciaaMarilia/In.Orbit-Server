@@ -7,6 +7,7 @@ import {
 import fastifyCors from '@fastify/cors'
 
 import { createGoalRoute } from '../routes/create-goal'
+import { deleteGoalRoute } from '../routes/delete-goal'
 import { getWeekSummaryRoute } from '../routes/get-week-summary'
 import { getPeddingGoalsRoute } from '../routes/get-pending-goals'
 import { createCompletionRoute } from '../routes/create-completion'
@@ -20,6 +21,7 @@ app.register(fastifyCors, {
 app.setValidatorCompiler(validatorCompiler)
 app.setSerializerCompiler(serializerCompiler)
 
+app.register(deleteGoalRoute)
 app.register(createGoalRoute)
 app.register(getWeekSummaryRoute)
 app.register(getPeddingGoalsRoute)

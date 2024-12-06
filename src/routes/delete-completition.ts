@@ -1,7 +1,8 @@
+import z from "zod";
 import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 
+import { ClientError } from "../errors/client-error";
 import { deleteCompletition } from "../functions/delete-completition";
-import z from "zod";
 
 export const deleteCompletitionRoute: FastifyPluginAsyncZod = async (app) => {
  app.delete(
@@ -18,12 +19,20 @@ export const deleteCompletitionRoute: FastifyPluginAsyncZod = async (app) => {
    const { completitionId } = request.params;
 
    try {
-    await deleteCompletition({
+    const deletedCompletition = await deleteCompletition({
      completitionId,
     });
+
+    if (!deletedCompletition) {
+     throw new ClientError("Completition not found");
+    }
     reply.status(200).send({ message: "Completition deleted successfully" });
    } catch (error) {
-    return error;
+    if (error instanceof ClientError) {
+     reply.status(400).send({ message: error.message });
+    } else {
+     reply.status(500).send({ message: "Internal Server Error." });
+    }
    }
   }
  );
